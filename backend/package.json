@@ -22,7 +22,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "echo 'Build step - ensuring all dependencies are installed' && npm install"
   },
   "keywords": [],
   "author": "",
