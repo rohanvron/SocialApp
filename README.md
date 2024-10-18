@@ -38,7 +38,7 @@ SocialApp is a MERN-stack application that allows users to create, view, update,
 - **Cors** for cross-origin resource sharing
 - **Dotenv** for environment variable management
 - **Multer** for handling file uploads
--**Cloudinary** for image storage
+- **Cloudinary** for image storage
 
 <p align="center"> 
 <img src="./frontend/src/assets/mongodb.png" alt="MongoDB image"> 
