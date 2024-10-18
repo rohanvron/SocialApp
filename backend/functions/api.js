@@ -1,9 +1,9 @@
-const express = require('express');
-   const serverless = require('serverless-http');
-   const app = require('../server'); // Adjust this path if necessary
+import express from 'express';
+import serverless from 'serverless-http';
+import app from '../server.js';
 
-   const handler = serverless(app);
+const serverlessHandler = serverless(app);
 
-   module.exports.handler = async (event, context) => {
-     return await handler(event, context);
-   };
+export const handler = async (event, context) => {
+  return await serverlessHandler(event, context);
+};
