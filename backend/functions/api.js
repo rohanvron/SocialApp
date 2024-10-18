@@ -1,16 +1,28 @@
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import express from 'express';
 import serverless from 'serverless-http';
-import app from '../server.js';
 
-const currentFilePath = fileURLToPath(import.meta.url);
-console.log('Current file:', currentFilePath);
-console.log('Directory name:', dirname(currentFilePath));
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const serverPath = resolve(__dirname, '..', 'server.js');
 
-console.log('Server imported successfully');
+let app;
+import(serverPath)
+  .then((module) => {
+    app = module.default || module;
+    console.log('Server imported successfully');
+  })
+  .catch((error) => {
+    console.error('Error importing server:', error);
+  });
 
-const serverlessHandler = serverless(app);
+const serverlessHandler = serverless((req, res) => {
+  if (app) {
+    app(req, res);
+  } else {
+    res.status(500).send('Server not initialized');
+  }
+});
 
 export const handler = async (event, context) => {
   console.log('Handler called with event:', JSON.stringify(event));
