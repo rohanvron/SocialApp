@@ -75,12 +75,14 @@ SocialApp is a MERN-stack application combining a React frontend and a Node.js b
    ```cd ../backend && npm install```
 
 3. Set up environment variables: Create a .env file in the backend directory with the following content:
-    ```MONGODB_URI=your_mongodb_connection_string
+    ```
+    MONGODB_URI=your_mongodb_connection_string
         JWT_SECRET=your_jwt_secret
         PORT=5000
         CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
         CLOUDINARY_API_KEY=api_key
-        CLOUDINARY_API_SECRET=secret_key```
+        CLOUDINARY_API_SECRET=secret_key
+    ```
 
 4. Start the backend server:
    ```cd backend && npm start```
