@@ -35,7 +35,7 @@ const Posts = ({
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
-        `http://localhost:5000/users/${postUserId}`,
+        `https://social-app-one-rho.vercel.app/users/${postUserId}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -54,7 +54,7 @@ const Posts = ({
 
   // likes
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:5000/posts/${postId}/like`, {
+    const response = await fetch(`https://social-app-one-rho.vercel.app/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const Posts = ({
   const handleEdit = async () => {
     console.log("Attempting to edit post with ID:", postId);
     try {
-      const response = await fetch(`http://localhost:5000/posts/${postId}`, {
+      const response = await fetch(`https://social-app-one-rho.vercel.app/posts/${postId}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ const Posts = ({
   const handleDelete = async () => {
     console.log("Attempting to delete post with ID:", postId);
     try {
-      const response = await fetch(`http://localhost:5000/posts/${postId}`, {
+      const response = await fetch(`https://social-app-one-rho.vercel.app/posts/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -127,7 +127,7 @@ const Posts = ({
   // add friend
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:5000/users/${loggedInUserId}/${postUserId}`,
+      `https://social-app-one-rho.vercel.app/users/${loggedInUserId}/${postUserId}`,
       {
         method: "PATCH",
         headers: {

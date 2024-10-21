@@ -14,7 +14,7 @@ const FriendList = ({ userId }) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:5000/users/${userId}/friends`,
+      `https://social-app-one-rho.vercel.app/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -30,7 +30,7 @@ const FriendList = ({ userId }) => {
 
   const patchFriend = async (friendId) => {
     const response = await fetch(
-      `http://localhost:5000/users/${userId}/${friendId}`,
+      `https://social-app-one-rho.vercel.app/users/${userId}/${friendId}`,
       {
         method: "PATCH",
         headers: {

@@ -46,7 +46,7 @@ const LoginForm = () => {
 
   const login = async (values, onSubmitProps) => {
     setLoading(true);  // Set loading to true when login starts
-    const loggedInResponse = await fetch("http://localhost:5000/auth/login", {
+    const loggedInResponse = await fetch("https://social-app-one-rho.vercel.app/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -68,7 +68,7 @@ const LoginForm = () => {
   const signup = async (formData, onSubmitProps) => {
     setLoading(true);  // set loading to true when signup starts
     try {
-      const savedUserResponse = await fetch("http://localhost:5000/auth/signup", {
+      const savedUserResponse = await fetch("https://social-app-one-rho.vercel.app/auth/signup", {
         method: "POST",
         body: formData,
       });
@@ -236,7 +236,7 @@ const LoginForm = () => {
                   setPageType(isLogin ? "signup" : "login");
                   resetForm();
                 }}
-                className="text-primary-300 hover:text-primary-400 cursor-pointer"
+                className="text-primary-300 hover:text-primary-400 cursor-pointer text-white"
               >
                 {isLogin
                   ? "Don't have an account? Sign Up here."

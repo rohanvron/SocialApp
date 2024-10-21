@@ -39,7 +39,7 @@ const MyPost = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/posts", {
+      const response = await fetch("https://social-app-one-rho.vercel.app/posts", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

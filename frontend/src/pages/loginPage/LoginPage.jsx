@@ -6,7 +6,7 @@ const LoginPage = () => {
       <nav className="bg-gray-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center h-16">
-            <span className="text-2xl font-bold text-primary-300">SocialApp</span>
+            <span className="text-2xl font-bold text-primary-300 text-white">SocialApp</span>
           </div>
         </div>
       </nav>
