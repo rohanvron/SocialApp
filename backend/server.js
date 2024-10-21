@@ -19,31 +19,26 @@ import { Signup } from "./controllers/auth.controller.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 dotenv.config();
+
 const app = express();
 
 // Cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// CORS configuration
-const corsOptions = {
-  origin: 'https://socialapp.pages.dev', 
-  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-  credentials: true,
-};
-
-// Middlewares
-app.use(cors(corsOptions)); 
-app.options('*', cors(corsOptions));
+// middlewares
 app.use(express.json());
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
 
 // Cloudinary storage configuration
 const storage = new CloudinaryStorage({
@@ -51,9 +46,10 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "social_app_uploads",
     allowed_formats: ["jpg", "jpeg", "png", "gif"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
   },
 });
+
 
 const upload = multer({
   storage: storage,
@@ -63,28 +59,29 @@ const upload = multer({
     } else {
       cb(new Error("Unexpected field"));
     }
-  },
+  }
 });
 
-// Routes
+// files upload routes
 app.post("/auth/signup", upload.single("picture"), Signup);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
+
+// routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
-// Connecting to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI, {})
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log("MongoDB connection error:", err));
+// connecting to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something broke!");
+  res.status(500).send('Something broke!');
 });
 
 export default app;
