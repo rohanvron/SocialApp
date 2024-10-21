@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import User from "../models/user.model.js";
 import cloudinary from "cloudinary";
 
@@ -16,8 +16,8 @@ export const Signup = async (req, res) => {
             return res.status(400).json({ message: "User already exists" });
         }
 
-        const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password, salt);
+        const salt = await bcryptjs.genSalt();
+        const passwordHash = await bcryptjs.hash(password, salt);
 
         let picturePath = "";
         if (req.file) {
@@ -55,7 +55,7 @@ export const Login = async (req, res) => {
         if (!user) return res.status(400).json({ message: "User does not exist. " });
 
         // comparing passwords
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcryptjs.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid credentials. " });
         
         // creating jwt token
