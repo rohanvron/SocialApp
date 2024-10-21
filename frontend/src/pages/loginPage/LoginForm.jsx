@@ -178,7 +178,7 @@ const LoginForm = () => {
                             </button>
                           </>
                         ) : (
-                          <p>Add Picture Here</p>
+                          <p className="text-white">Add Picture Here</p>
                         )}
                       </div>
                     )}
